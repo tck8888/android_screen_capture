@@ -1,6 +1,7 @@
 package com.tck.screen.capture
 
 import android.hardware.display.DisplayManager
+import android.hardware.display.VirtualDisplay
 import android.media.MediaCodec
 import android.media.MediaCodecInfo
 import android.media.MediaFormat
@@ -11,7 +12,8 @@ import android.view.Surface
 /**
  *
  * description:
-
+https://github.com/wossoneri/ScreenCapture
+https://www.dazhuanlan.com/2020/01/31/5e33a1d4c1391/
  * @date 2020/12/9 22:51
 
  * @author tck88
@@ -40,7 +42,8 @@ class VideoCodec(val mediaProjection: MediaProjection) : Thread() {
             mediaProjection.createVirtualDisplay(
                 "abc", 480, 640, 1,
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC,
-                inputSurface, null, null);
+                inputSurface, VirtualDisplayCallback(), null
+            )
         } catch (e: Exception) {
 
         }
@@ -49,5 +52,23 @@ class VideoCodec(val mediaProjection: MediaProjection) : Thread() {
     override fun run() {
         super.run()
 
+    }
+}
+
+
+class VirtualDisplayCallback : VirtualDisplay.Callback() {
+    override fun onPaused() {
+        super.onPaused()
+        MyLog.d("VirtualDisplayCallback--->onPaused")
+    }
+
+    override fun onResumed() {
+        super.onResumed()
+        MyLog.d("VirtualDisplayCallback--->onResumed")
+    }
+
+    override fun onStopped() {
+        super.onStopped()
+        MyLog.d("VirtualDisplayCallback--->onStopped")
     }
 }

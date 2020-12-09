@@ -3,6 +3,7 @@ package com.tck.screen.capture
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.hardware.display.VirtualDisplay
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.widget.Toast
