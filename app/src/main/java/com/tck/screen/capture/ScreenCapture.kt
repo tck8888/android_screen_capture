@@ -3,9 +3,14 @@ package com.tck.screen.capture
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.hardware.display.DisplayManager
 import android.hardware.display.VirtualDisplay
+import android.media.MediaCodec
+import android.media.MediaCodecInfo
+import android.media.MediaFormat
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
+import android.view.Surface
 import android.widget.Toast
 
 /**
@@ -19,7 +24,7 @@ import android.widget.Toast
  * @version v1.0.0
  *
  */
-class ScreenCapture(val url: String, val activity: Activity) : Runnable {
+class ScreenCapture(val url: String, val activity: Activity) {
 
     private lateinit var mediaProjectionManager: MediaProjectionManager
     private var mediaProjection: MediaProjection? = null
@@ -36,7 +41,10 @@ class ScreenCapture(val url: String, val activity: Activity) : Runnable {
             if (data != null) {
                 mediaProjection = mediaProjectionManager.getMediaProjection(resultCode, data)
                 if (mediaProjection != null) {
-                    //TODO:开启线程，开始执行
+                    val service = Intent(activity, ScreenCaptureService::class.java)
+                    service.putExtra("data", data)
+                    service.putExtra("resultCode", data)
+                    activity.startForegroundService(service)
                 } else {
                     Toast.makeText(activity, "data=null", Toast.LENGTH_SHORT).show()
                 }
@@ -46,10 +54,10 @@ class ScreenCapture(val url: String, val activity: Activity) : Runnable {
         }
     }
 
-    override fun run() {
+    fun run() {
         val tempMediaProjection = mediaProjection ?: return
-        val videoCodec = VideoCodec(tempMediaProjection)
-        videoCodec.startScreenCapture()
+        val videoCodec = VideoCodec(url, tempMediaProjection)
+        ScreenCaptureExecutors.instance.execute(videoCodec)
     }
 
 

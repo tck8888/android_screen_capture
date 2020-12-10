@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity() {
             ScreenCapture("${cacheDir}${File.separator}${System.currentTimeMillis()}.mp4", this)
 
         binding.btnStartScreenCapture.setOnClickListener {
-
-
+            screenCapture.startScreenCapture()
         }
     }
 
