@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Screen_capture">
+        <activity android:name=".ScreenShotActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +24,11 @@
 
         <service
             android:name=".ScreenCaptureService"
+            android:enabled="true"
+            android:foregroundServiceType="mediaProjection" />
+
+        <service
+            android:name=".ScreenShotService"
             android:enabled="true"
             android:foregroundServiceType="mediaProjection" />
     </application>

@@ -21,40 +21,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        screenCapture =
-            ScreenCapture("${cacheDir}${File.separator}${System.currentTimeMillis()}.mp4", this)
-
-        binding.btnStartScreenCapture.setOnClickListener {
-            screenCapture.startScreenCapture()
+        binding.btnStartScreenShot.setOnClickListener {
+          startActivity(Intent(this,ScreenShotActivity::class.java))
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        screenCapture.onActivityResult(requestCode, resultCode, data)
-    }
-
-
-    private fun initScreenCapture() {
-        val mediaProjectionManager =
-            getSystemService(Context.MEDIA_PROJECTION_SERVICE) as? MediaProjectionManager
-        if (mediaProjectionManager == null) {
-            return
-        }
-        val mediaProjection = mediaProjectionManager.getMediaProjection(100, intent)
-        val metrics = DisplayMetrics()
-
-//        mediaProjection.createVirtualDisplay(
-//                "ScreenCapture",
-//                binding.surfaceView.width,
-//                binding.surfaceView.height,
-//                display.getRealMetrics(metrics)
-//        )
-
-    }
-
-
-    private fun startScreenCapture() {
-
     }
 }
