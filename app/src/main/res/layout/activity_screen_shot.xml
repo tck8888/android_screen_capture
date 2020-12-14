@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ScreenShotActivity">
+
+    <Button
+        android:id="@+id/btn_start_screen_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="启动媒体投影服务" />
+
+    <Button
+        android:id="@+id/btn_stop_screen_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="停止媒体投影服务" />
 
     <Button
         android:id="@+id/btn_start_screen_shot"

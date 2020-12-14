@@ -17,7 +17,6 @@ class ScreenShotActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityScreenShotBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScreenShotBinding.inflate(layoutInflater)
