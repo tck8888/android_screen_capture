@@ -37,6 +37,7 @@ class ScreenShotActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        MyLog.d("requestCode:${requestCode},resultCode:${resultCode},data:${data?.toString()}")
         if (requestCode == 100) {
             if (data != null) {
                 val service = Intent(this, ScreenShotService::class.java)
@@ -46,5 +47,5 @@ class ScreenShotActivity : AppCompatActivity() {
             }
         }
     }
-    
+
 }
